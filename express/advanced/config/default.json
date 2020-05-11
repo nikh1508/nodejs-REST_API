@@ -1,0 +1,8 @@
+{
+  "name": "Default App Name",
+  "some_default_setting": "default_value",
+  "port": 8000,
+  "mail": {
+    "password": "random"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "App Production Environment",
+  "port": 8080,
+  "mail": {
+    "host": "dev-mail-server"
+  }
+}

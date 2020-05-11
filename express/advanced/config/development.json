@@ -1,0 +1,6 @@
+{
+  "name": "App Deveolpment Environment",
+  "mail": {
+    "host": "dev-mail-server"
+  }
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage</title>
+  </head>
+  <body>
+    <h2>Hello <%= name %></h3>
+    <br />
+    <h3>These are the courses available:</h3>
+    <ul>
+      <% for(var c of courses) { %>
+        <% if(c.course_id === courses.length) { %>
+            <li>ID=> <%= c.course_id %> | Name=> <%= c.course_name %> (This is the final course)</li>
+        <% } else { %>
+            <li>ID=> <%= c.course_id %> | Name=> <%= c.course_name %> </li>
+        <% } %>
+      <% } %>
+    </ul>
+  </body>
+</html>

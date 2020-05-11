@@ -1,0 +1,6 @@
+{
+  "port": "PORT",
+  "mail": {
+    "password": "EMAIL_PASSWORD"
+  }
+}
