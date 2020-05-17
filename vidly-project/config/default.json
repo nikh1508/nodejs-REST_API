@@ -1,0 +1,4 @@
+{
+  "name": "Vidly App",
+  "DB_URL": "mongodb://localhost/vidly-app"
+}

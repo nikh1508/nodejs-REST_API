@@ -1,0 +1,5 @@
+{
+  "name": "Vidly Developement Server",
+  "DB_URL": "mongodb://localhost/vidly-app",
+  "PORT": 5000
+}
