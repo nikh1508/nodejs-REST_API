@@ -5,9 +5,12 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const debug = require("debug")("app:debug");
 const config = require("config");
+const Joi = require("joi");
+Joi.ObjectID = require("joi-objectid")(Joi);
 const genre = require("./routes/genre");
 const customer = require("./routes/customer");
 const movie = require("./routes/movie");
+const rental = require("./routes/rental");
 
 const app = express();
 
@@ -20,6 +23,7 @@ if (app.get("env") == "development") app.use(morgan("tiny"));
 app.use("/api/genre", genre);
 app.use("/api/customer", customer);
 app.use("/api/movie", movie);
+app.use("/api/rental", rental);
 
 mongoose
   .connect(config.get("DB_URL"), {
