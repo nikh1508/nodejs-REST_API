@@ -14,10 +14,16 @@ const rental = require("./routes/rental");
 const user = require("./routes/user");
 const auth = require("./routes/auth");
 
+if (!config.has("vidly_jwtSecretKey")) {
+  console.error(
+    "Fatal Error. No secret key found for JWT token generation. Exiting Now..."
+  );
+  process.exit(1);
+}
+
 const app = express();
 
 app.use(express.json());
-
 app.use(helmet());
 app.use(cors());
 if (app.get("env") == "development") app.use(morgan("tiny"));

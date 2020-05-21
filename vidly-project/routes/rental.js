@@ -4,16 +4,18 @@ const { Movie } = require("../models/movie");
 const { Customer } = require("../models/customer");
 const mongoose = require("mongoose");
 const Fawn = require("fawn");
+const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
 Fawn.init(mongoose);
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", [auth, admin], async (req, res) => {
   const rentals = await Rental.find().sort({ dateOut: -1 });
   res.send(rentals);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const error = validateRequest(req.body);
   if (error) return res.status(400).send(error.message);
   const _movie = await Movie.findById(req.body.movieID);

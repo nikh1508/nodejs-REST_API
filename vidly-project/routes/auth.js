@@ -12,7 +12,8 @@ router.post("/", async (req, res) => {
   if (!user) return res.status(400).send("Invalid login credentials.");
   const passwordMatch = await bcrypt.compare(req.body.password, user.password);
   if (!passwordMatch) return res.status(400).send("Invalid login credentials.");
-  res.send(true);
+  const token = user.generateAuthToken();
+  res.send(token);
 });
 
 function validateRequest(body) {

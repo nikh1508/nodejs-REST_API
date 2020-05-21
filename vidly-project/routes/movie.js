@@ -1,6 +1,8 @@
 const express = require("express");
 const { Movie, validateRequest } = require("../models/movie");
 const { Genre } = require("../models/genre");
+const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
 const router = express.Router();
 
@@ -9,7 +11,7 @@ router.get("/", async (req, res) => {
   res.send(movies);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const error = validateRequest(req.body);
   if (error) return res.status(400).send(error.message);
   try {
@@ -26,7 +28,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   //   const error = validateRequest(req.body);
   //   if (error) res.status(400).send(error.message);
   /*    Commenting the above code means that the user nedd not send the complete object,
@@ -54,7 +56,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", [auth, admin], async (req, res) => {
   try {
     const movie = await Movie.findByIdAndRemove(req.params.id);
     if (!movie)

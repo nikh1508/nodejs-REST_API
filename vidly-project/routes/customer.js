@@ -1,13 +1,16 @@
 const express = require("express");
 const { Customer, validate } = require("../models/customer");
+const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
+
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", [auth, admin], async (req, res) => {
   const customers = await Customer.find().sort({ name: 1 });
   res.send(customers);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const customer = await validate(req.body);
     const result = await customer.save();
@@ -17,7 +20,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   try {
     await validate(req.body);
     const customer = await Customer.findByIdAndUpdate(
@@ -33,7 +36,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", [auth, admin], async (req, res) => {
   try {
     const customer = await Customer.findByIdAndRemove(req.params.id);
     if (!customer)
