@@ -23,6 +23,6 @@
     "lodash": "^4.17.15",
     "mongoose": "^5.9.13",
     "morgan": "^1.10.0",
-    "underscore": "^1.10.2"
+    "underscore": "^1.12.1"
   }
 }
